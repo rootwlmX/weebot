@@ -12,7 +12,7 @@ abstract class UpdateMessage extends BaseUpdate {
     private Integer userId;
     private String rawMessage;
     private Integer font;
-    private Object sender;
+    private MessageSender sender;
 
     public String getMessageType() {
         return messageType;
@@ -62,11 +62,11 @@ abstract class UpdateMessage extends BaseUpdate {
         this.font = font;
     }
 
-    public Object getSender() {
+    public MessageSender getSender() {
         return sender;
     }
 
-    public void setSender(Object sender) {
+    public void setSender(MessageSender sender) {
         this.sender = sender;
     }
 }
