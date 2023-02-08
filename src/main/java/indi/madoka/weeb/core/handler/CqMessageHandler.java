@@ -24,7 +24,7 @@ public class CqMessageHandler implements CqUpdateHandler<Serializable> {
 
     @Override
     public void handle() {
-        log.info(jsonObj.toString());
+        log.info("[TYPE MESSAGE]" + jsonObj.toString());
     }
 
     public JSONObject getJsonObj() {

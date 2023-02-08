@@ -21,7 +21,7 @@ public class WebSocketConfig {
      *
      * 开启WebSocketClient<br>
      *
-     * Data Example:<br>
+     * Example:<br>
      *[websocket] 收到消息={"post_type":"message","message_type":"group","time":1670228166,
      * "self_id":1170895958,"sub_type":"normal","raw_message":"[CQ:at,qq=1170895958] ",
      * "sender":{"age":0,"area":"","card":"我的狗叫波奇塔你狗叫什么","level":"","nickname":"あさがみ ふじの",
