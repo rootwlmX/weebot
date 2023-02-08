@@ -41,6 +41,7 @@ public class CqHttpInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler, Exception ex) throws Exception {
+        log.info("afterCompletion");
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
     }
 
