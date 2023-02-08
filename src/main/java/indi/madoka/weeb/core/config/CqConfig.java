@@ -22,6 +22,4 @@ public class CqConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/error");
     }
-
-
 }
