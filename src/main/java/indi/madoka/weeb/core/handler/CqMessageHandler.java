@@ -25,7 +25,7 @@ import java.util.Map;
 public class CqMessageHandler implements CqUpdateHandler<Serializable>, InitializingBean, ApplicationContextAware {
     private ApplicationContext applicationContext;
     private JSONObject jsonObj;
-    private static final Map<KeywordMatch, Method> KEYWORD_MATCH_METHOD_MAP = new HashMap<>();
+    public static final Map<KeywordMatch, Method> KEYWORD_MATCH_METHOD_MAP = new HashMap<>();
 
     @Override
     public PostType getPostType() {
@@ -39,29 +39,18 @@ public class CqMessageHandler implements CqUpdateHandler<Serializable>, Initiali
 
     @Override
     public void handle() {
-        String raw_message = jsonObj.getString("raw_message");
+        String rawMessage = jsonObj.getString("raw_message");
 
         for (KeywordMatch match : KEYWORD_MATCH_METHOD_MAP.keySet()) {
-            if(match.getKeyword().equals(raw_message)){
+            if(match.matches(rawMessage)){
                 try {
                     KEYWORD_MATCH_METHOD_MAP.get(match).invoke(match.getClazz());
                 } catch (InvocationTargetException | IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
-
             }
         }
-
         log.info("[TYPE MESSAGE]" + jsonObj.toString());
-/*        WebClient client = WebClient.create();
-        Flux<Map> mapFlux = client.post()
-                .uri("localhost:5700/send_group_msg")
-                .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(jsonObj.toString())
-                .retrieve()
-                .bodyToFlux(Map.class);
-        mapFlux.collectList()
-                .subscribe(list -> log.info(list.toString()));*/
     }
 
     public JSONObject getJsonObj() {
@@ -72,15 +61,16 @@ public class CqMessageHandler implements CqUpdateHandler<Serializable>, Initiali
     public void afterPropertiesSet() {
         Map<String, Object> beansWithAnnotation = applicationContext.getBeansWithAnnotation(Plugin.class);
         Collection<Object> values = beansWithAnnotation.values();
+        log.info("Initializing Plugins");
         for (Object value : values) {
-            log.info("加载插件---"+value.getClass().getAnnotation(Plugin.class).value());
+            String pluginName = value.getClass().getAnnotation(Plugin.class).value();
+            log.info("Initialized Plugin: "+ pluginName);
             Method[] methods = value.getClass().getMethods();
             for (Method method : methods) {
                 if (method.isAnnotationPresent(Keyword.class)){
                     Keyword annotation = method.getAnnotation(Keyword.class);
-                    log.info("扫描到注解的关键字为--"+annotation.value());
-                    log.info("扫描到注解的匹配类型为--"+annotation.matchType().name());
-                    KEYWORD_MATCH_METHOD_MAP.put(new KeywordMatch(value,annotation.value(), annotation.matchType()), method);
+                    log.info("Scanned Method Keyword: {}  Match Type: {}",annotation.value(), annotation.matchType().name());
+                    KEYWORD_MATCH_METHOD_MAP.put(new KeywordMatch(value,pluginName,annotation.value(), annotation.matchType()), method);
                 }
             }
         }
@@ -90,4 +80,6 @@ public class CqMessageHandler implements CqUpdateHandler<Serializable>, Initiali
     public void setApplicationContext(@NotNull ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
+
+
 }

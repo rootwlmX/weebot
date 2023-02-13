@@ -24,4 +24,17 @@ public class TestModule {
                 .bodyToFlux(Map.class)
                 .subscribe();
     }
+
+    @Keyword(value = "#前缀", matchType = MatchType.STARTS_WITH)
+    public void testStart(){
+        WebClient client = WebClient.create();
+        client.post()
+                .uri("localhost:5700/send_group_msg")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue("{\"group_id\":791782725,\"message\":\"前缀测试成功\"}")
+                .retrieve()
+                .bodyToFlux(Map.class)
+                .subscribe();
+    }
 }
+
