@@ -4,6 +4,9 @@ import org.springframework.stereotype.Component;
 
 import java.lang.annotation.*;
 
+/**
+ * @author Arcueid
+ */
 @Component
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

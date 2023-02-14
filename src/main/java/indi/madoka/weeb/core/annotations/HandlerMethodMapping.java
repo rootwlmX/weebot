@@ -24,7 +24,7 @@ public class HandlerMethodMapping implements InitializingBean, ApplicationContex
 
     @Override
     public void afterPropertiesSet() {
-        setKeywordMap();
+        init();
     }
 
     @Override
@@ -32,11 +32,15 @@ public class HandlerMethodMapping implements InitializingBean, ApplicationContex
         this.applicationContext = applicationContext;
     }
 
-    private void setKeywordMap() {
+    private void init() {
         Map<String, Object> beansWithAnnotation = applicationContext.getBeansWithAnnotation(Plugin.class);
-        Collection<Object> values = beansWithAnnotation.values();
+        Collection<Object> beans = beansWithAnnotation.values();
         log.info("Initializing Plugins");
-        for (Object value : values) {
+        initPlugins(beans);
+    }
+
+    private void initPlugins(Collection<Object> beans){
+        for (Object value : beans) {
             String pluginName = value.getClass().getAnnotation(Plugin.class).value();
             log.info("Initialized Plugin: " + pluginName);
             Method[] methods = value.getClass().getMethods();

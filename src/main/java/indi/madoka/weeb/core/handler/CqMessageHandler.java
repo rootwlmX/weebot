@@ -31,8 +31,7 @@ public class CqMessageHandler implements CqUpdateHandler<Serializable> {
     private JSONObject jsonObj;
     private final Map<MatchingInfo, Method> KEYWORD_MATCH_METHOD_MAP;
 
-    @Autowired
-    public CqMessageHandler(HandlerMethodMapping handlerMethodMapping) {
+    public CqMessageHandler() {
         this.KEYWORD_MATCH_METHOD_MAP = HandlerMethodMapping.KEYWORD_MATCH_METHOD_MAP;
     }
 

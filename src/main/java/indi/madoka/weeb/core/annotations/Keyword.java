@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Keyword {
+public @interface Keyword{
     String value() default "";
     MatchType matchType() default MatchType.EQUALS;
     MsgTarget receiveTarget() default MsgTarget.ALL;
