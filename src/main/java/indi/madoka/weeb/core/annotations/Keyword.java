@@ -5,6 +5,9 @@ import indi.madoka.weeb.core.enums.MsgTarget;
 
 import java.lang.annotation.*;
 
+/**
+ * @author Arcueid
+ */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

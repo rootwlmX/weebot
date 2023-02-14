@@ -1,5 +1,8 @@
 package indi.madoka.weeb.core.config;
 
+/**
+ * @author Arcueid
+ */
 public class CqApiConfig {
     public static final String CQ_HTTP_REQUEST_URL = "localhost:5700";
 

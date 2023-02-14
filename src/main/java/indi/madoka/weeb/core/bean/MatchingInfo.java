@@ -3,13 +3,16 @@ package indi.madoka.weeb.core.bean;
 import indi.madoka.weeb.core.enums.MatchType;
 import indi.madoka.weeb.core.utils.RegUtil;
 
-public class KeywordMatch {
+/**
+ * @author Arcueid
+ */
+public class MatchingInfo {
     private final Object clazz;
     private final String plugin;
     private final String keyword;
     private final MatchType matchType;
 
-    public KeywordMatch(Object clazz, String plugin, String keyword, MatchType matchType) {
+    public MatchingInfo(Object clazz, String plugin, String keyword, MatchType matchType) {
         this.clazz = clazz;
         this.plugin = plugin;
         this.keyword = keyword;
@@ -34,5 +37,17 @@ public class KeywordMatch {
 
     public String getPlugin() {
         return plugin;
+    }
+
+    // todo 覆写hashCode和equals
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }

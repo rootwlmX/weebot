@@ -9,6 +9,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Map;
 
+/**
+ * @author Arcueid
+ */
 @Plugin("测试插件")
 @Slf4j
 public class TestModule {

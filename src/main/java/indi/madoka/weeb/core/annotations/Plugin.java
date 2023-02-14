@@ -9,5 +9,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Plugin {
-    String value() default "";
+    String value() default "Plugin with no name";
 }

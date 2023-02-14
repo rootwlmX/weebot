@@ -14,6 +14,9 @@ import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Map;
 
+/**
+ * @author Arcueid
+ */
 @Component
 public class CqUpdateHandlerFactory implements InitializingBean, ApplicationContextAware {
 
