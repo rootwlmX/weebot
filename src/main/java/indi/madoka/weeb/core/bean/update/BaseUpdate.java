@@ -8,15 +8,15 @@ public abstract class BaseUpdate {
     /**
      * 事件发生的unix时间戳
      */
-    private Integer time;
+    protected Integer time;
     /**
      * 收到事件的机器人的 QQ 号
      */
-    private Integer selfId;
+    protected Integer selfId;
     /**
      * 表示该上报的类型, 消息, 消息发送, 请求, 通知, 或元事件
      */
-    private String postType;
+    protected String postType;
 
     public Integer getTime() {
         return time;

@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import indi.madoka.weeb.core.annotations.Keyword;
 import indi.madoka.weeb.core.annotations.Plugin;
+import indi.madoka.weeb.core.bean.send.Sender;
 import indi.madoka.weeb.core.enums.MatchType;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -19,6 +21,14 @@ import static indi.madoka.weeb.core.config.CqApiConfig.CQ_HTTP_SEND_GROUP_MSG;
 @Plugin("测试插件")
 @Slf4j
 public class TestModule {
+
+    private final Sender sender;
+
+    @Autowired
+    public TestModule(Sender sender){
+        this.sender = sender;
+    }
+
     @Keyword(value = "command", matchType = MatchType.EQUALS)
     public void test(){
         log.info("{\"group_id\": 791782725,\"message\": \"测试成功\"}");
