@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import indi.madoka.weeb.core.bean.update.message.GroupMessage;
 import indi.madoka.weeb.core.bean.update.message.UpdateMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -19,6 +20,7 @@ import static indi.madoka.weeb.core.config.CqApiConfig.CQ_HTTP_SEND_PRIVATE_MSG;
  * @author Arcueid
  */
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
+@Slf4j
 public class Sender {
     private static final String GROUP_ID = "group_id";
     private static final String USER_ID = "user_id";
@@ -33,10 +35,10 @@ public class Sender {
 
     public static class Builder{
         private static final String DATA = "data";
-        private static final String IMAGE = "IMAGE";
+        private static final String IMAGE = "image";
         private static final String TYPE = "type";
         private static final String TEXT = "text";
-        private static final String URL = "url";
+        private static final String FILE = "file";
         private final UpdateMessage updateMessage;
         private final JSONArray message;
         private final JSONObject replyObject;
@@ -52,7 +54,7 @@ public class Sender {
         }
 
         public Builder addImage(String imageUrl){
-            return buildMessage(imageUrl, URL, IMAGE);
+            return buildMessage(imageUrl, FILE, IMAGE);
         }
 
         public Builder addText(String text){
@@ -93,6 +95,7 @@ public class Sender {
     }
 
     private void send(String api){
+        log.info(this.replyJsonObject.toString());
         this.webClient.post()
                 .uri(api)
                 .contentType(MediaType.APPLICATION_JSON)
