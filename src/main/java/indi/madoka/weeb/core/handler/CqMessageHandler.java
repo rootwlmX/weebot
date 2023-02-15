@@ -42,7 +42,6 @@ public class CqMessageHandler implements CqUpdateHandler<Serializable> {
     public void init(JSONObject jsonObj) {
         this.jsonObj = jsonObj;
         this.updateMessage = updateMessageFactory.getMessageInJavaObject(jsonObj);
-        log.info(updateMessage.toString());
     }
 
     @Override
@@ -51,7 +50,8 @@ public class CqMessageHandler implements CqUpdateHandler<Serializable> {
         for (MatchingInfo match : KEYWORD_MATCH_METHOD_MAP.keySet()) {
             if (match.matches(rawMessage)) {
                 try {
-                    KEYWORD_MATCH_METHOD_MAP.get(match).invoke(match.getClazz());
+                    // todo 动态参数 e.g: 方法指定只要求 String groupId, 则反射传入 groupId
+                    KEYWORD_MATCH_METHOD_MAP.get(match).invoke(match.getClazz(),updateMessage);
                 } catch (InvocationTargetException | IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }

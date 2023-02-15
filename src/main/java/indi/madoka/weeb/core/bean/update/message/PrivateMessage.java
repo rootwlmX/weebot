@@ -11,14 +11,14 @@ import java.util.List;
  */
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PrivateMessage extends UpdateMessage{
-    protected String targetId;
+    protected Integer targetId;
     protected List<Message> message;
 
-    public String getTargetId() {
+    public Integer getTargetId() {
         return targetId;
     }
 
-    public void setTargetId(String targetId) {
+    public void setTargetId(Integer targetId) {
         this.targetId = targetId;
     }
 

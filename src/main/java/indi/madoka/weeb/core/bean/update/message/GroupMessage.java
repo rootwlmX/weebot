@@ -13,7 +13,7 @@ import java.util.List;
 public class GroupMessage extends UpdateMessage{
     protected List<Message> message;
 
-    protected String groupId;
+    protected Integer groupId;
 
     protected Long messageSeq;
 
@@ -25,11 +25,11 @@ public class GroupMessage extends UpdateMessage{
         this.message = message;
     }
 
-    public String getGroupId() {
+    public Integer getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(String groupId) {
+    public void setGroupId(Integer groupId) {
         this.groupId = groupId;
     }
 
@@ -43,7 +43,7 @@ public class GroupMessage extends UpdateMessage{
 
     @Override
     public String toString() {
-        return "群聊消息: PrivateMessage{" +
+        return "群聊消息: GroupMessage{" +
                 "message=" + message +
                 ", groupId='" + groupId + '\'' +
                 ", messageSeq=" + messageSeq +
