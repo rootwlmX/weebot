@@ -53,7 +53,7 @@ public class GroupMessage extends UpdateMessage{
                 ", userId=" + userId +
                 ", rawMessage='" + rawMessage + '\'' +
                 ", font=" + font +
-                ", sender=" + sender +
+                ", sender=" + sender.toString() +
                 ", time=" + time +
                 ", selfId=" + selfId +
                 ", postType='" + postType + '\'' +
