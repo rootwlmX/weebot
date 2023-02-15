@@ -25,7 +25,7 @@ public class TestModule {
         Sender sender = new Sender.Builder(updateMessage)
                 .addText("测试text")
                 .build();
-        sender.sendGroup();
+        sender.sendAll();
     }
 
     @Keyword(value = "#前缀", matchType = MatchType.STARTS_WITH)

@@ -71,6 +71,14 @@ public class Sender {
         }
     }
 
+    public void sendAll(){
+        if(updateMessage instanceof GroupMessage){
+            sendGroup();
+        }else{
+            sendPrivate();
+        }
+    }
+
     public void sendGroup(){
         if(updateMessage instanceof GroupMessage){
             GroupMessage groupMessage = (GroupMessage) updateMessage;
