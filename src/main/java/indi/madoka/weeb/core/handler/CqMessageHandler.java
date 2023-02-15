@@ -2,24 +2,17 @@ package indi.madoka.weeb.core.handler;
 
 import com.alibaba.fastjson.JSONObject;
 import indi.madoka.weeb.core.annotations.HandlerMethodMapping;
-import indi.madoka.weeb.core.annotations.Keyword;
-import indi.madoka.weeb.core.annotations.Plugin;
 import indi.madoka.weeb.core.bean.MatchingInfo;
+import indi.madoka.weeb.core.bean.factory.UpdateMessageFactory;
+import indi.madoka.weeb.core.bean.update.message.UpdateMessage;
 import indi.madoka.weeb.core.enums.PostType;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -29,10 +22,14 @@ import java.util.Map;
 @Slf4j
 public class CqMessageHandler implements CqUpdateHandler<Serializable> {
     private JSONObject jsonObj;
+    private UpdateMessage updateMessage;
+    private final UpdateMessageFactory updateMessageFactory;
     private final Map<MatchingInfo, Method> KEYWORD_MATCH_METHOD_MAP;
 
-    public CqMessageHandler() {
+    @Autowired
+    public CqMessageHandler(UpdateMessageFactory updateMessageFactory) {
         this.KEYWORD_MATCH_METHOD_MAP = HandlerMethodMapping.KEYWORD_MATCH_METHOD_MAP;
+        this.updateMessageFactory = updateMessageFactory;
     }
 
 
@@ -44,6 +41,7 @@ public class CqMessageHandler implements CqUpdateHandler<Serializable> {
     @Override
     public void init(JSONObject jsonObj) {
         this.jsonObj = jsonObj;
+        this.updateMessage = updateMessageFactory.getMessageInJavaObject(jsonObj);
     }
 
     @Override
@@ -52,7 +50,8 @@ public class CqMessageHandler implements CqUpdateHandler<Serializable> {
         for (MatchingInfo match : KEYWORD_MATCH_METHOD_MAP.keySet()) {
             if (match.matches(rawMessage)) {
                 try {
-                    KEYWORD_MATCH_METHOD_MAP.get(match).invoke(match.getClazz());
+                    // todo 动态参数 e.g: 方法指定只要求 String groupId, 则反射传入 groupId
+                    KEYWORD_MATCH_METHOD_MAP.get(match).invoke(match.getClazz(),updateMessage);
                 } catch (InvocationTargetException | IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }

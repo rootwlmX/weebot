@@ -1,5 +1,8 @@
 package indi.madoka.weeb.core.bean.send;
 
+/**
+ * @author  Arcueid
+ */
 public class Message{
     private Data data;
     private String type;

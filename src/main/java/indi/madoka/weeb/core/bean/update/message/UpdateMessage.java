@@ -4,15 +4,18 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import indi.madoka.weeb.core.bean.update.BaseUpdate;
 
+/**
+ * @author Arcueid
+ */
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
-abstract class UpdateMessage extends BaseUpdate {
-    private String messageType;
-    private String subType;
-    private Integer messageId;
-    private Integer userId;
-    private String rawMessage;
-    private Integer font;
-    private MessageSender sender;
+public abstract class UpdateMessage extends BaseUpdate {
+    protected String messageType;
+    protected String subType;
+    protected Integer messageId;
+    protected Integer userId;
+    protected String rawMessage;
+    protected Integer font;
+    protected MessageSender sender;
 
     public String getMessageType() {
         return messageType;
