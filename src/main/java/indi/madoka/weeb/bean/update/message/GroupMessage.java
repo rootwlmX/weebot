@@ -2,28 +2,16 @@ package indi.madoka.weeb.bean.update.message;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import indi.madoka.weeb.bean.send.Message;
-
-import java.util.List;
 
 /**
  * @author Arcueid
  */
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class GroupMessage extends UpdateMessage{
-    protected List<Message> message;
 
     protected Integer groupId;
 
     protected Long messageSeq;
-
-    public List<Message> getMessage() {
-        return message;
-    }
-
-    public void setMessage(List<Message> message) {
-        this.message = message;
-    }
 
     public Integer getGroupId() {
         return groupId;

@@ -2,7 +2,10 @@ package indi.madoka.weeb.bean.update.message;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import indi.madoka.weeb.bean.send.Message;
 import indi.madoka.weeb.bean.update.BaseUpdate;
+
+import java.util.List;
 
 /**
  * @author Arcueid
@@ -16,7 +19,7 @@ public abstract class UpdateMessage extends BaseUpdate {
     protected String rawMessage;
     protected Integer font;
     protected MessageSender sender;
-
+    protected List<Message> message;
     public String getMessageType() {
         return messageType;
     }
@@ -71,5 +74,13 @@ public abstract class UpdateMessage extends BaseUpdate {
 
     public void setSender(MessageSender sender) {
         this.sender = sender;
+    }
+
+    public List<Message> getMessage() {
+        return message;
+    }
+
+    public void setMessage(List<Message> message) {
+        this.message = message;
     }
 }

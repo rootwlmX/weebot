@@ -2,9 +2,6 @@ package indi.madoka.weeb.bean.update.message;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import indi.madoka.weeb.bean.send.Message;
-
-import java.util.List;
 
 /**
  * @author Arcueid
@@ -12,7 +9,6 @@ import java.util.List;
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PrivateMessage extends UpdateMessage{
     protected Integer targetId;
-    protected List<Message> message;
 
     public Integer getTargetId() {
         return targetId;
@@ -20,14 +16,6 @@ public class PrivateMessage extends UpdateMessage{
 
     public void setTargetId(Integer targetId) {
         this.targetId = targetId;
-    }
-
-    public List<Message> getMessage() {
-        return message;
-    }
-
-    public void setMessage(List<Message> message) {
-        this.message = message;
     }
 
     @Override
