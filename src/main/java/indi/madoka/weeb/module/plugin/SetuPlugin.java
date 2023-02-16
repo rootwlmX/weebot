@@ -29,8 +29,12 @@ public class SetuPlugin {
                 .sendAll();
     }
 
-    @Keyword(value = "#涩图", matchType = MatchType.STARTS_WITH)
+    @Keyword(value = "#涩图 ", matchType = MatchType.STARTS_WITH)
     public void randomPictureByTag(UpdateMessage updateMessage){
-
+        String tag = updateMessage.getRawMessage().substring(4);
+        String taggedPictureUrl = setuService.getTaggedPicture(tag);
+        new Sender.Builder(updateMessage).addImage(taggedPictureUrl)
+                .build()
+                .sendAll();
     }
 }

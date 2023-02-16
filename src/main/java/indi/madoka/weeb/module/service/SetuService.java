@@ -22,8 +22,20 @@ public class SetuService {
         return getResultImageUrl(apiRequest.block());
     }
 
+    public String getTaggedPicture(String tag){
+        Mono<String> apiRequest = loliconApiRequest(tag);
+        return getResultImageUrl(apiRequest.block());
+    }
+
     private Mono<String> loliconApiRequest() {
-        return this.webClient.post()
+        return this.webClient.get()
+                .retrieve()
+                .bodyToMono(String.class);
+    }
+
+    private Mono<String> loliconApiRequest(String tag){
+        return this.webClient.get()
+                .uri("?tag=" + tag)
                 .retrieve()
                 .bodyToMono(String.class);
     }

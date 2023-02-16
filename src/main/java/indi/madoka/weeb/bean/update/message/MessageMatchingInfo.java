@@ -17,10 +17,6 @@ public class MessageMatchingInfo extends MatchingInfo {
         this.matchType = matchType;
     }
 
-    public Object getClazz() {
-        return clazz;
-    }
-
     public String getKeyword() {
         return keyword;
     }

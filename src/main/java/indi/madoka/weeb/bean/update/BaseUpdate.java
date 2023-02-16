@@ -3,6 +3,9 @@ package indi.madoka.weeb.bean.update;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
+/**
+ * @author Arcueid
+ */
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public abstract class BaseUpdate {
     /**
